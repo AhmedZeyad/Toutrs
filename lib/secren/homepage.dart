@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tuters/Data/homeData.dart';
 import 'package:tuters/Data/pupblicData.dart';
 import 'package:tuters/secren/loginPage.dart';
-import 'package:tuters/secren/prodductpage.dart';
 
 import 'costom/costomSlider.dart';
+import 'product/prodductpage.dart';
 
 class homepage extends StatefulWidget {
   @override
@@ -12,45 +12,61 @@ class homepage extends StatefulWidget {
 }
 
 class _homepageState extends State<homepage> {
+  bool click = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: Icon(
-          Icons.filter_alt,
-          color: Colors.black,
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          actions: [
+            SizedBox(
+              width: 20,
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              child: Icon(
+                Icons.notifications_none_rounded,
+                color: Colors.black45,
+              ),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Icon(
+              Icons.align_vertical_bottom_rounded,
+              color: Colors.black45,
+            ),
+          ],
+          flexibleSpace: Padding(
+            padding: const EdgeInsets.only(top: 40, left: 15),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "توصيل الى",
+                  "Delivering to ",
                   style: TextStyle(fontSize: 17, color: Colors.black),
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    Text(
+                      "iraq Baghdad",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
                     Icon(
                       Icons.arrow_drop_down_outlined,
                       color: Colors.black,
-                    ),
-                    Text(
-                      "بغداد، العراق",
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
                     ),
                   ],
                 )
               ],
             ),
-          )
-        ],
-      ),
+          )),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -59,8 +75,11 @@ class _homepageState extends State<homepage> {
               scrollDirection: Axis.vertical,
               children: [
                 GestureDetector(
-                  onTap: (){print("login");
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>loging() ));},
+                  onTap: () {
+                    print("login");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => loging()));
+                  },
                   child: Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Row(
@@ -118,56 +137,52 @@ class _homepageState extends State<homepage> {
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10),
                   height: 280,
-                  child: ListView(
+                  child: ListView.builder(
+                    itemCount: 3,
+                    itemBuilder: (context, int index) {
+                      return viwe(index);
+                    },
                     scrollDirection: Axis.horizontal,
-                    children: [
-                      viwe(0),
-                      viwe(1),
-                      viwe(2),
-                      viwe(1),
-                    ],
                   ),
                 ),
                 Container(
+                  margin: EdgeInsets.symmetric(vertical: 10),
                   height: 280,
-                  child: ListView(
+                  child: ListView.builder(
+                    itemCount: 3,
+                    itemBuilder: (context, int index) {
+                      return viwe(index);
+                    },
                     scrollDirection: Axis.horizontal,
-                    children: [
-                      viwe(2),
-                      viwe(0),
-                      viwe(1),
-                      viwe(1),
-                    ],
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 19),
+                  margin: EdgeInsets.symmetric(vertical: 10),
                   height: 280,
-                  child: ListView(
+                  child: ListView.builder(
+                    itemCount: 3,
+                    itemBuilder: (context, int index) {
+                      return viwe(index);
+                    },
                     scrollDirection: Axis.horizontal,
-                    children: [
-                      viwe(1),
-                      viwe(0),
-                      viwe(2),
-                      viwe(1),
-                    ],
                   ),
                 ),
                 Container(
+                  margin: EdgeInsets.symmetric(vertical: 10),
                   height: 280,
-                  child: ListView(
+                  child: ListView.builder(
+                    itemCount: 3,
+                    itemBuilder: (context, int index) {
+                      return viwe(index);
+                    },
                     scrollDirection: Axis.horizontal,
-                    children: [
-                      viwe(1),
-                      viwe(2),
-                      viwe(0),
-                      viwe(1),
-                    ],
                   ),
                 ),
               ],
             ),
           ),
+
+
         ],
       ),
     );
@@ -252,13 +267,10 @@ class _homepageState extends State<homepage> {
                   child: Stack(
                     clipBehavior: Clip.none,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.favorite_border,
-                          size: 30,
-                          color: Colors.white,
-                        ),
+                      Positioned(
+                        top: 5,
+                        left: 5,
+                        child: LikeButton(),
                       ),
                       Positioned(
                         right: 30,
@@ -395,9 +407,54 @@ class _homepageState extends State<homepage> {
                 ],
               ),
             ),
+
           ],
         ),
       ),
     );
+  }
+}
+
+class LikeButton extends StatefulWidget {
+  @override
+  State<LikeButton> createState() => _LikeButtonState();
+  final Color unactive;
+  LikeButton({
+     this.unactive=Colors.white,
+  });
+}
+
+
+class _LikeButtonState extends State<LikeButton> {
+  bool isclick = false;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: likeIcon(click: isclick,unactive:widget.unactive,),
+      onTap: () {
+        print("object");
+        bool click = isclick;
+        setState(() {
+          click == true ? isclick = false : isclick = true;
+        });
+      },
+    );
+  }
+}
+
+class likeIcon extends StatelessWidget {
+  const likeIcon({
+
+    Key? key,
+    required this.click,
+    required this.unactive
+  }) : super(key: key);
+final Color unactive;
+  final bool click;
+
+  @override
+  Widget build(BuildContext context) {
+    return Icon(click == false ? Icons.favorite_border : Icons.favorite,
+        size: 30, color: click == false ? unactive : Colors.red);
   }
 }

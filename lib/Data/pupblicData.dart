@@ -1,11 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:tuters/secren/CartPage.dart';
+import 'package:tuters/secren/SearchPage.dart';
+import 'package:tuters/secren/acountPage.dart';
+import 'package:tuters/secren/deleverPage.dart';
+import 'package:tuters/secren/homepage.dart';
 
 Color mainColoe() {
   return Color(0xff03b191);
 }
 
+Color SecondColor(){
+  return Colors.black12.withOpacity(0.03);
+
+}
 Color longWordc() {
   return Colors.black38;
+}
+Text Mone(int mone){
+  return Text("IQD $mone",style: TextStyle(fontSize: 17,color: mainColoe()),);
+}
+Text  SubTitle(String text){
+  return Text(text,
+      style: TextStyle(fontSize: 17,color: Colors.black)
+    ,);
+}
+Text  UserName(String text){
+  return Text(text,
+      style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black)
+    ,);
+}
+Text  RedSubTitle(String text){
+  return Text(text,
+      style: TextStyle(fontSize: 17,color: Colors.red)
+    ,);
 }
 //f= full
 
@@ -70,4 +97,10 @@ List<double> commentRating = [
   4.5,
   3.5,
   1.0,
+];
+List  Pages=[
+  homepage(),
+  search(),
+  cart(),
+  acount(),
 ];

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:tuters/secren/costom/chosePage.dart';
 import 'package:tuters/secren/homepage.dart';
 
 import '../Data/pupblicData.dart';
@@ -15,8 +16,8 @@ class _SplashPage extends State<SplashPage>
     with SingleTickerProviderStateMixin{
   @override
   void FuterDlay() {
-    Future.delayed(Duration(seconds: 4), () {
-      Navigator.of(context).push(MaterialPageRoute(builder: (_) =>  homepage()));
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) =>  chosePage()));
     });
   }
   void initState() {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tuters/secren/product/prodductpage.dart';
 import '../../Data/homeData.dart';
 import '../../Data/productData.dart';
 import '../../Data/pupblicData.dart';
-import '../prodductpage.dart';
 
 PageView CostomSlider(
   Color colore,

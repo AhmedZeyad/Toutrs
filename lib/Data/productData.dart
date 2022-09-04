@@ -66,3 +66,4 @@ List discountList=[
   "30%",
   "5%",
 ];
+List PageTab=["farstPage","secondPage","TherdPage"];
