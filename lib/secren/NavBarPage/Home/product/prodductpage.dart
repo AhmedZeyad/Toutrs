@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tuters/secren/homepage.dart';
-import 'package:tuters/secren/product/CategoreBar.dart';
-import 'package:tuters/secren/product/ListOfCategore.dart';
-import 'package:tuters/secren/task.dart';
+import 'package:tuters/API/Models/RestorentModles/Meals_Res.dart';
+import 'package:tuters/Data/pupblicData.dart';
+import 'package:tuters/secren/InitPages/task.dart';
+import 'package:tuters/secren/NavBarPage/Home/homepage.dart';
+import 'package:tuters/secren/NavBarPage/Home/product/CategoreBar.dart';
 
-import '../../../Data/pupblicData.dart';
-// import 'task.dart';
+import '../../../../Data/pupblicWidge.dart';
+import 'package:tuters/API/Conaction/GetFromApi/Meals_git.dart';
 
+  List<Meals>? allmeals;
 class PrductPage extends StatefulWidget {
   final String image;
   final String name;
@@ -43,12 +45,35 @@ class PrductPage extends StatefulWidget {
 }
 
 class _PrductPageState extends State<PrductPage> {
-  bool chech = false;
+  bool resposchech = false;
 
-  // TabController _controller =TabController(vsync: ,length: 4);
+  void initState() {
+    super.initState();
+    myinfi();
+  }
+  myinfi() async {
+    print(widget.name);
 
+    allmeals = await getinfomeal().meal_get(widget.name);
+     if(allmeals!=null){
+      setState((){
+
+        resposchech=true;
+      }
+      );
+    }else{
+       allmeals = await getinfomeal().meal_get(widget.name);
+     }
+  }
+
+// meal_get
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
+    // int a = my.length;
+
+    print(widget.name);
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -62,50 +87,12 @@ class _PrductPageState extends State<PrductPage> {
                       restorentHome(context),
                       restorentInfo(),
                       restorentOffers(),
-                      Container(height: 100,width: 50,child: CategoryTab()),
-
-                      // SliverToBoxAdapter(
-                      //     child:
-                      //     CatagoresRestorent(),
-                      //
-                      // )
+                      Container(height: 100, width: 50, child: CategoryTab()),
                     ]),
                   ),
-
-                  // Container(
-                  //   child: TabBar(
-                  //
-                  //     tabs: [
-                  //       Tab(
-                  //         icon: Icon(Icons.abc),
-                  //       ),
-                  //       Tab(
-                  //         icon: Icon(Icons.abc),
-                  //       ),
-                  //       Tab(
-                  //         icon: Icon(Icons.abc),
-                  //       ),
-                  //       Tab(
-                  //         icon: Icon(Icons.abc),
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
-                  // Container(
-                  //   child: TabBarView(
-                  //     children: [
-                  //     Text("data"),
-                  //     Text("data"),
-                  //     Text("data"),
-                  //     Text("data"),
-                  //   ],),
-                  // )
-                  // TabBarView(children: children)
                 ],
               ),
-            )
-            ,
-
+            ),
           ],
         ),
       ),
@@ -126,19 +113,22 @@ class _PrductPageState extends State<PrductPage> {
             ),
           ),
         ),
-        GestureDetector(
-          onTap: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>taskpage(image: widget.image,)));
-          },
-          child: Container(
-            height: 250,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 3,
-                itemBuilder: (context, int index) {
-                  return Populer();
-                }),
-          ),
+        Container(
+          height: 250,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: allmeals?.length ?? 2,
+              itemBuilder: (context, int index) {
+                return GestureDetector(
+                  child: Populer(index),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ProductOrder(
+                              index: index,
+                            )));
+                  },
+                );
+              }),
         ),
       ],
     );
@@ -328,7 +318,7 @@ class _PrductPageState extends State<PrductPage> {
       height: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           image: (DecorationImage(
-              fit: BoxFit.cover, image: AssetImage(widget.image)))),
+              fit: BoxFit.cover, image: NetworkImage(widget.image)))),
       child: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -355,8 +345,8 @@ class _PrductPageState extends State<PrductPage> {
               )),
             ),
           ),
-          Positioned(left: 10, top: 10, child: backbuton()),
-          Positioned(left: 10, top: 10, child: backbuton()),
+          Positioned(left: 10, top: 10, child: backbuton(context)),
+          Positioned(left: 10, top: 10, child: backbuton(context)),
           Positioned(
               right: 150,
               top: 10,
@@ -388,51 +378,7 @@ class _PrductPageState extends State<PrductPage> {
     );
   }
 
-  Container backbuton() {
-    return Container(
-      height: 40,
-      width: 40,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50), color: Colors.white),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.pop(context);
-        },
-        child: Icon(
-          Icons.arrow_back,
-          color: Colors.black,
-        ),
-      ),
-    );
-  }
-
-  Container ShearIcon() {
-    return Container(
-      height: 40,
-      width: 40,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50), color: Colors.white),
-      child: Icon(
-        Icons.share_outlined,
-        color: Colors.black,
-      ),
-    );
-  }
-
-  Container SearchIcon() {
-    return Container(
-      height: 40,
-      width: 40,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50), color: Colors.white),
-      child: Icon(
-        Icons.search,
-        color: Colors.black,
-      ),
-    );
-  }
-
-  Container Populer() {
+  Container Populer(int index) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Column(
@@ -443,19 +389,21 @@ class _PrductPageState extends State<PrductPage> {
             width: MediaQuery.of(context).size.width * 0.5,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    fit: BoxFit.cover, image: AssetImage(widget.image)),
+                  fit: BoxFit.cover,
+                  image: NetworkImage(allmeals?[index].mealImage ?? null_image),
+                ),
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.amber),
           ),
           Text(
-            "ahmedahmedahmed ahmd",
+            allmeals?[index].mealName ?? "null",
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w600,
             ),
           ),
           Text(
-            "IQD 5,000",
+            "IQD ${allmeals?[index].mealCost ?? "nul"}",
             style: TextStyle(color: mainColoe()),
           ),
         ],
@@ -463,70 +411,3 @@ class _PrductPageState extends State<PrductPage> {
     );
   }
 }
-
-
-
-
-// Container(
-//
-// height: 20,
-// child:
-// TabBar(controller:_tabController,
-// tabs: [
-// Tab(child: Text("fsdfdsfsf"),),
-// Tab(child: Text("fsdfdsfsf"),),
-// Tab(child: Text("fsdfdsfsf"),),
-// ],),
-// ),
-// SizedBox(height: 20,),
-// Container(
-// height: 20,
-// width: 20,
-// child: TabBarView(controller: _tabController,
-// children: [
-// Container(
-// height: 20,
-// width: 20,
-// child: Icon(Icons.abc)),
-// Container(
-// height: 20,
-// width: 20,
-// child: Icon(Icons.abc)),
-// Container(
-// height: 20,
-// width: 20,
-// child: Icon(Icons.abc)),
-// ],
-// )),
-// class CatagoresRestorent extends StatefulWidget {
-//   @override
-//   State<CatagoresRestorent> createState() => _CatagoresRestorentState();
-// }
-//
-// class _CatagoresRestorentState extends State<CatagoresRestorent> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return SingleChildScrollView(
-//       scrollDirection: Axis.horizontal,
-//       child: Row(
-//         children: List.generate(
-//           4,
-//           (index) => tab("title", index + 12),
-//         ),
-//
-//         //
-//       ),
-//     );
-//   }
-// }
-//
-// Container tab(String title, double fontSize,
-//     {Color textColor = Colors.black, Color backroindColor = Colors.white}) {
-//   return Container(
-//     decoration: BoxDecoration(color: backroindColor),
-//     child: (Text(
-//       title,
-//       style: TextStyle(fontSize: fontSize, color: textColor),
-//     )),
-//   );
-// }

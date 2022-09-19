@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tuters/Data/homeData.dart';
 import 'package:tuters/Data/pupblicData.dart';
+import 'package:tuters/costom/costomSlider.dart';
 
 class search extends StatefulWidget {
   const search({Key? key}) : super(key: key);
@@ -30,18 +31,11 @@ class _searchState extends State<search> {
       body: Column(children: [
         offer(),
         Expanded(
-          child: ListView(
-            children: [
-              post(image[0]),
-              post(image[1]),
-              post(image[2]),
-              post(image[0]),
-              post(image[1]),
-              post(image[2]),
-              post(image[0]),
-              post(image[1]),
-              post(image[2]),
-            ],
+          child: ListView.builder(itemBuilder: ((context,int index){
+            return               post(allmealsoffer?[index].mealImage??null_image,index);
+
+          }),
+itemCount: (allmealsoffer?.length??2)-1,
           ),
         )
       ]),
@@ -101,7 +95,7 @@ class _searchState extends State<search> {
     );
   }
 
-  Container post(String myimage) {
+  Container post(String myimage,int index) {
     return Container(
       margin: EdgeInsets.only(left: 10,top: 25,bottom: 35),
 
@@ -114,14 +108,14 @@ class _searchState extends State<search> {
             decoration: BoxDecoration(
                 color: Colors.amber,
                 image: DecorationImage(
-                    fit: BoxFit.cover, image: AssetImage(myimage))),
+                    fit: BoxFit.cover, image: NetworkImage(myimage))),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "order Anything",
+                allmealsoffer?[index].mealName??"null",
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -132,8 +126,7 @@ class _searchState extends State<search> {
                 height: 50,
                 width:190,
                 child: Text(
-                  "order Anythingorder order Anything Anythinffffffaaaaafg",
-                  overflow: TextOverflow.ellipsis,
+allmealsoffer?[index].mealCaption??"null",                  overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   style: TextStyle(fontSize: 16, color: Colors.black),
                 ),

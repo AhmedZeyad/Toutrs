@@ -1,12 +1,13 @@
 
 import 'package:flutter/material.dart';
-import 'package:tuters/secren/costom/chosePage.dart';
-import 'package:tuters/secren/homepage.dart';
+import 'package:tuters/API/Conaction/GetFromApi/Rstorent%20git%20info.dart';
+import 'package:tuters/API/Models/RestorentModles/MY_RestorentInfo.dart';
+import 'package:tuters/secren/NavBarPage/Home/homepage.dart';
 
-import '../Data/pupblicData.dart';
+import '../../Data/pupblicData.dart';
+import '../../costom/chosePage.dart';
 
 class SplashPage extends StatefulWidget {
-  // const SplashPage({Key? key}) : super(key: key);
 
   @override
   State<SplashPage> createState() => _SplashPage();
@@ -20,8 +21,10 @@ class _SplashPage extends State<SplashPage>
       Navigator.of(context).push(MaterialPageRoute(builder: (_) =>  chosePage()));
     });
   }
+
   void initState() {
     FuterDlay();
+
     super.initState();
   }
   @override
@@ -46,3 +49,5 @@ class _SplashPage extends State<SplashPage>
     );
   }
   }
+
+

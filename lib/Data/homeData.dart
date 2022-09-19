@@ -7,24 +7,15 @@ import 'pupblicData.dart';
 
 
 
-//post
 
-List image = [
-  "images/post/burger.jpeg",
-  "images/post/pizza.jpeg",
-  "images/post/vegen.jpeg",
-];
-List Restorent=[
-  "Fier Fier Al Saydiya",
-  "volcano",
-"Eat&Go",
-];
+
 List foodType=[
   "burger",
   "pizza",
   "vigen",
 
 ];
+
 List deleveryTime=[
   "35-40",
   "40-45",
@@ -71,12 +62,6 @@ Map<double,Row> StarsNu={
 
   ],),
 };
-// ###################################
-List Offring=[
-  "images/of1.jpeg",
-  "images/of2.png",
-  "images/of3.jpeg",
-];
 List TypeI  =[
   "images/ic1.png",
   "images/ic2.png",
@@ -87,44 +72,14 @@ List TypeI  =[
 
 ];
 List TypeN  =[
-  "مطاعم",
-  "توترز فريش",
-  "البقالة",
-  "متجر",
-  "المندوب",
-  "اضف رصيد",
+  "food",
+  "Fresh",
+  "stor",
+  "Market",
+  "butker",
+  "add mony",
 ];
-Map<double, Row> UserStars = {
-  1.0: Row(
-    children: [
-      UstarF()
-    ],
-  ),
-  3.5: Row(children: [
-    UstarF(),
-    UstarF(),
-    UstarF(),
-    ustarm(),
-    ustaro(),
 
-  ],),
-
-  4.5: Row(children: [
-    UstarF(),
-    UstarF(),
-    UstarF(),
-    UstarF(),
-    ustarm(),
-
-
-  ],),
-};
-List Discrabtion=[
-  "the beast food in the best place",
-  "theat abo hamza",
-  "mnwe ea wrd",
-
-];
 List discount=[
   "10%",
   "23%",
@@ -134,9 +89,4 @@ List tutePeople=[
   44,
   190,
   300,
-];
-List personalRestS=[
-  4.4,
-  5.0 ,
-  4.9
 ];

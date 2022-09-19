@@ -1,15 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:tuters/secren/product/prodductpage.dart';
+import 'package:tuters/API/Conaction/GetFromApi/Meals_git.dart';
+import 'package:tuters/API/Models/RestorentModles/Meals_Res.dart';
+import 'package:tuters/secren/NavBarPage/Home/product/prodductpage.dart';
 import '../../Data/homeData.dart';
 import '../../Data/productData.dart';
 import '../../Data/pupblicData.dart';
+List<Meals>?allmealsoffer;
+class CostomSlidere extends StatefulWidget {
+  final Color colore;
+  const CostomSlidere({
+    required this.colore,
+});
+  @override
+  State<CostomSlidere> createState() => _CostomSlidereState();
+}
+
+class _CostomSlidereState extends State<CostomSlidere> {
+
+
+  @override
+  Widget build(BuildContext context) {
+    return CostomSlider(widget.colore);
+  }
+}
 
 PageView CostomSlider(
-  Color colore,
-  List image,
+
+Color colore,
 ) {
+
   return PageView.builder(
-      itemCount: Offring.length,
+      itemCount: (allmealsoffer?.length??2)-1,
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
         return GestureDetector(
@@ -19,11 +40,11 @@ PageView CostomSlider(
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => PrductPage(
                   StarsN:StarsNu,
-                  discount: discountList[index],
+                  discount: allmealsoffer?[index].mealCaption??"null",
                   Rating:UserStar,
                   CommentName:commentName,
-                      image: image[index],
-                      name: RestN[index],
+                      image: allmealsoffer?[index].mealImage??null_image,
+                      name: allmealsoffer?[index].resN??"null",
                       deleverTime: RestDT[index],
                       comment: RestCom[index],
                       stars: RestS[index],
@@ -36,11 +57,11 @@ PageView CostomSlider(
                 color: colore.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(12),
                 image: DecorationImage(
-                    fit: BoxFit.cover, image: AssetImage(image[index]))),
+                    fit: BoxFit.cover, image: NetworkImage(allmealsoffer?[index].mealImage??null_image))),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(image.length, (indexcolor) {
+              children: List.generate((allmealsoffer?.length??2)-1, (indexcolor) {
                 return Container(
                   margin: EdgeInsets.all(5),
                   height: 10,

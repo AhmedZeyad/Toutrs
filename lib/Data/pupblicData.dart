@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tuters/secren/CartPage.dart';
-import 'package:tuters/secren/SearchPage.dart';
-import 'package:tuters/secren/acountPage.dart';
-import 'package:tuters/secren/deleverPage.dart';
-import 'package:tuters/secren/homepage.dart';
+import 'package:tuters/secren/NavBarPage/Delevery/CartPage.dart';
+import 'package:tuters/secren/NavBarPage/Serch/SearchPage.dart';
+import 'package:tuters/secren/NavBarPage/Account/acountPage.dart';
+import 'package:tuters/secren/NavBarPage/Home/homepage.dart';
 
 Color mainColoe() {
   return Color(0xff03b191);
@@ -92,6 +91,8 @@ List RestCom = [
   "يخبل شنو هاي فد شي راقي ارفع له القبعة رهيب الله يخبل يموتتتتت بس دريد اراويكم  التحكم بالخط شون حيصير نقاط بلاخير   ",
   "الطعم الرهيب عمي",
   "عمي غالين وااكل بارد ",
+  "الطعم الرهيب عمي",
+
 ];
 List<double> commentRating = [
   4.5,
@@ -104,3 +105,4 @@ List  Pages=[
   cart(),
   acount(),
 ];
+String  null_image= "https://play-lh.googleusercontent.com/i67ij_F7t8n4DzDKYqj5srwgcdkg5xjvx6nDaaqzgy2aMf0VfqZOpIgbRaYTg6JhMPfM;";
