@@ -11,6 +11,7 @@ import 'pupblicData.dart';
 
 List foodType=[
   "burger",
+  "burger",
   "pizza",
   "vigen",
 
@@ -19,10 +20,12 @@ List foodType=[
 List deleveryTime=[
   "35-40",
   "40-45",
+  "40-45",
   "25-30",
 ];
 List totalStars=[
   "4.0",
+  "5.0",
   "5.0",
   "2.5",
 ];
@@ -30,6 +33,7 @@ List totalStars=[
 
 List RestS=[
   4.0,
+  5.0,
   5.0,
 2.5,
 ];
@@ -83,10 +87,12 @@ List TypeN  =[
 List discount=[
   "10%",
   "23%",
+  "23%",
   "33%",
 ];
 List tutePeople=[
   44,
+  190,
   190,
   300,
 ];
