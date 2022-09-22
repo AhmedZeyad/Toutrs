@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tuters/API/Conaction/GetFromApi/Meals_git.dart';
-import 'package:tuters/API/Models/RestorentModles/Meals_Res.dart';
+
 import 'package:tuters/secren/NavBarPage/Home/product/prodductpage.dart';
 import '../../Data/homeData.dart';
 import '../../Data/productData.dart';
 import '../../Data/pupblicData.dart';
-List<Meals>?allmealsoffer;
+import '../API/Models/RestorentModles/Offres.dart';
+List<Offres>?allmealsoffer;
+
 class CostomSlidere extends StatefulWidget {
   final Color colore;
   const CostomSlidere({
@@ -30,7 +31,7 @@ Color colore,
 ) {
 
   return PageView.builder(
-      itemCount: (allmealsoffer?.length??2)-1,
+      itemCount: (allmealsoffer?.length??2),
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
         return GestureDetector(
@@ -40,10 +41,10 @@ Color colore,
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => PrductPage(
                   StarsN:StarsNu,
-                  discount: allmealsoffer?[index].mealCaption??"null",
+                  discount: allmealsoffer?[index].caption??"null",
                   Rating:UserStar,
                   CommentName:commentName,
-                      image: allmealsoffer?[index].mealImage??null_image,
+                      image: allmealsoffer?[index].image??null_image,
                       name: allmealsoffer?[index].resN??"null",
                       deleverTime: RestDT[index],
                       comment: RestCom[index],
@@ -57,11 +58,11 @@ Color colore,
                 color: colore.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(12),
                 image: DecorationImage(
-                    fit: BoxFit.cover, image: NetworkImage(allmealsoffer?[index].mealImage??null_image))),
+                    fit: BoxFit.cover, image: NetworkImage(allmealsoffer?[index].image??null_image))),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate((allmealsoffer?.length??2)-1, (indexcolor) {
+              children: List.generate((allmealsoffer?.length??2), (indexcolor) {
                 return Container(
                   margin: EdgeInsets.all(5),
                   height: 10,

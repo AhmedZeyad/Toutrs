@@ -13,7 +13,8 @@ print(json);
       return mealsFromJson(json);
     }
   }
-}class getallmeal{
+}
+class getallmeal{
 
   Future meal_allget() async {
     var URL = Uri.parse("http://localhost:4000/allmell");

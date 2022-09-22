@@ -2,6 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:tuters/Data/pupblicData.dart';
+import 'package:tuters/costom/chosePage.dart';
+
+import '../../InitPages/login_page.dart';
+import '../Home/homepage.dart';
 
 class acount extends StatefulWidget {
   const acount({Key? key}) : super(key: key);
@@ -11,8 +15,10 @@ class acount extends StatefulWidget {
 }
 
 class _acountState extends State<acount> {
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {    print(user);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -21,7 +27,7 @@ class _acountState extends State<acount> {
         flexibleSpace: SafeArea(
           child: Container(
             margin: EdgeInsets.only(left: 20, top: 10),
-            child: UserName("Ahmed Zeyad"),
+            child:user!=null? UserName(user?[0].userName??"uu"):null,
           ),
         ),
       ),
@@ -30,25 +36,25 @@ class _acountState extends State<acount> {
           Expanded(
               child: ListView(
             children: [
-// 
+              //user point
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 10),
                 padding: EdgeInsets.only(left: 20),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20)),
-                child: Row(
+                child:user==null?null: Row(mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Icon(
                       Icons.card_giftcard,
                       color: mainColoe(),
                       size: 30,
                     ),
-                    Column(
+                    Column(crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SubTitle("Green"),
                         Text(
-                          "0 Pts",
+                          "${user?[0].point} Pts",
                           style: TextStyle(color: longWordc()),
                         ),
                       ],
@@ -62,7 +68,8 @@ class _acountState extends State<acount> {
                   ],
                 ),
               ),
-              // 
+
+              // option
               Container(
                 height: 100,
                 margin: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
@@ -76,11 +83,14 @@ class _acountState extends State<acount> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20)),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: user==null?MainAxisAlignment.start:MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    if(user==null)SizedBox(width: 30,),
+
+                    //profile
                     Container(
-                      child: Column(
+                      child: user==null?null:Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
@@ -102,6 +112,7 @@ class _acountState extends State<acount> {
                         ],
                       ),
                     ),
+                    //suppport
                     Container(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -127,8 +138,9 @@ class _acountState extends State<acount> {
                         ],
                       ),
                     ),
+                    //pament
                     Container(
-                      child: Column(
+                      child:user==null?null: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
@@ -150,6 +162,8 @@ class _acountState extends State<acount> {
                         ],
                       ),
                     ),
+                    if(user==null)SizedBox(width: 30,),
+                    //language
                     Container(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -176,7 +190,9 @@ class _acountState extends State<acount> {
                   ],
                 ),
               ),
-              Container(
+
+              // Toters Cash
+              if(user!=null)Container(
                 margin: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
                 decoration: BoxDecoration(
                     boxShadow: [
@@ -225,7 +241,7 @@ class _acountState extends State<acount> {
                               SubTitle("Wallet"),
                             ],
                           ),
-                          Mone(0)
+                          Mone(user?[0].mone??00)
                         ],
                       ),
                     ),
@@ -288,7 +304,9 @@ class _acountState extends State<acount> {
                   ],
                 ),
               ),
-              Container(
+
+              //Promatios
+              if(user!=null)Container(
                 margin: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
                 decoration: BoxDecoration(
                     boxShadow: [
@@ -331,7 +349,7 @@ class _acountState extends State<acount> {
                               SubTitle("Wallet"),
                             ],
                           ),
-                          Mone(0)
+                          Mone(user?[0].mone??00)
                         ],
                       ),
                     ),
@@ -366,7 +384,9 @@ class _acountState extends State<acount> {
                   ],
                 ),
               ),
-              Container(
+
+              //Account detils
+              if(user!=null)Container(
                 margin: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
                 decoration: BoxDecoration(
                     boxShadow: [
@@ -524,7 +544,9 @@ class _acountState extends State<acount> {
                   ],
                 ),
               ),
-              Container(
+
+              //Help center
+            Container(
                 margin: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
                 decoration: BoxDecoration(
                     boxShadow: [
@@ -538,6 +560,7 @@ class _acountState extends State<acount> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    //title
                     Container(
                         margin: EdgeInsets.only(left: 20, top: 10),
                         child: Text(
@@ -545,7 +568,9 @@ class _acountState extends State<acount> {
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         )),
-                    Container(
+                    // element
+
+                    if(user!=null) Container(
                       margin: EdgeInsets.only(
                         left: 20,
                         top: 5,
@@ -568,14 +593,14 @@ class _acountState extends State<acount> {
                         ],
                       ),
                     ),
-                    Center(
+                    if(user!=null) Center(
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.85,
                         color: longWordc(),
                         height: 0.2,
                       ),
                     ),
-                    Container(
+                    if(user!=null)Container(
                       margin: EdgeInsets.only(left: 20, top: 5),
                       child: Row(
                         children: [
@@ -595,7 +620,7 @@ class _acountState extends State<acount> {
                         ],
                       ),
                     ),
-                    Center(
+                    if(user!=null)Center(
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.85,
                         color: longWordc(),
@@ -653,42 +678,99 @@ class _acountState extends State<acount> {
                   ],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: longWordc(),
-                        blurRadius: 0.01,
+
+              //sing out
+              if(user!=null)GestureDetector(
+                onTap: (){
+                  setState(() {
+                    user=null;
+                    indexPage=0;
+                  });
+                  Navigator.of(context).push(MaterialPageRoute(builder: (_) =>  chosePage()));
+
+                },
+
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: longWordc(),
+                          blurRadius: 0.01,
+                        ),
+                      ],
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(left: 20, top: 5, right: 20),
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              child: Stack(
+                                children: [
+                                  Icon(
+                                    Icons.logout_outlined,
+                                    size: 30,
+                                    color: Colors.red,
+                                  )
+                                ],
+                              ),
+                            ),
+                            RedSubTitle("Sing out"),
+                          ],
+                        ),
                       ),
                     ],
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(left: 20, top: 5, right: 20),
-                      child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(10),
-                            child: Stack(
-                              children: [
-                                Icon(
-                                  Icons.logout_outlined,
-                                  size: 30,
-                                  color: Colors.red,
-                                )
-                              ],
+                  ),
+                ),
+              ),
+              if(user==null)GestureDetector(
+                onTap: (){
+
+                  Navigator.of(context).push(MaterialPageRoute(builder: (_) =>  login()));
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: longWordc(),
+                          blurRadius: 0.01,
+                        ),
+                      ],
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(left: 20, top: 5, right: 20),
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              child: Stack(
+                                children: [
+                                  Icon(
+                                    Icons.logout_outlined,
+                                    size: 30,
+                                    color: mainColoe(),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                          RedSubTitle("Sing out"),
-                        ],
+                            mainSubTitle("log in /Sing up "),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:tuters/secren/InitPages/login_page.dart';
 
 import 'API/Conaction/GetFromApi/Rstorent git info.dart';
 import 'Data/productData.dart';
@@ -12,7 +13,6 @@ void main() {
 
   runApp(MaterialApp(
       home: SplashPage()
-      // home: testing())
   ));
 }
 

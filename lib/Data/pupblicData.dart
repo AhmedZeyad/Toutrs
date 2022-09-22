@@ -33,6 +33,11 @@ Text  RedSubTitle(String text){
       style: TextStyle(fontSize: 17,color: Colors.red)
     ,);
 }
+Text  mainSubTitle(String text){
+  return Text(text,
+      style: TextStyle(fontSize: 17,color: mainColoe())
+    ,);
+}
 //f= full
 
 Icon starF({double size = 30}) {

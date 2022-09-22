@@ -4,12 +4,14 @@ import 'package:tuters/Data/homeData.dart';
 import 'package:tuters/Data/pupblicData.dart';
 
 import '../../../API/Conaction/GetFromApi/Rstorent git info.dart';
+import '../../../API/Conaction/GetFromApi/get_Offers.dart';
 import '../../../API/Models/RestorentModles/MY_RestorentInfo.dart';
 import '../../../costom/costomSlider.dart';
 import '../../AppBar/NotifacationPage/notifacation.dart';
-import 'loginPage.dart';
+import '../../InitPages/login_page.dart';
 import 'product/prodductpage.dart';
 
+  List<AllRes>?allres;
 class homepage extends StatefulWidget {
   @override
   State<homepage> createState() => _homepageState();
@@ -22,10 +24,9 @@ class _homepageState extends State<homepage> {
   bool getchekk = false;
 
   bool resstorentcheck=false;
-  myallmeals() async {
-    ;
+  offrs() async {
 
-    allmealsoffer = await getallmeal().meal_allget();
+    allmealsoffer = await geteroffers().offrsget();
     if(allmeals!=null){
       setState((){
 
@@ -38,13 +39,12 @@ class _homepageState extends State<homepage> {
   }
   void initState() {
     super.initState();
-    myinfi();
-    myallmeals();
+    restorentget();
+    offrs();
   }
-  List<AllRes>?allres;
 
-  myinfi()async{
-    allres=await  getinfo().restorent_got();
+  restorentget()async{
+    allres=await  gerestorent().restorent_got();
     if (allres!=null){
       setState((){
         resstorentcheck=true;
@@ -54,6 +54,7 @@ class _homepageState extends State<homepage> {
   }
 @override
   Widget build(BuildContext context) {
+    print(user);
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -107,7 +108,7 @@ class _homepageState extends State<homepage> {
             child: ListView(
               scrollDirection: Axis.vertical,
               children: [
-                LoginButton(context),
+                user==null?LoginButton(context): Text("") ,
                 Offer_Slinder(),
                 Category(),
                 Column(
@@ -142,7 +143,7 @@ class _homepageState extends State<homepage> {
                       margin: EdgeInsets.symmetric(vertical: 10),
                       height: 300,
                       child: ListView.builder(
-                        itemCount: 4,
+                        itemCount: allres?.length,
                         itemBuilder: (context, int index) {
                           print("${allres?.length}hehehe");
                           return viwe(
@@ -221,14 +222,12 @@ class _homepageState extends State<homepage> {
       onTap: () {
         print("login");
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => loging()));
+            context, MaterialPageRoute(builder: (context) => login()));
       },
     );
   }
 
-  Container type(
-    int index,
-  ) {
+  Container type(int index) {
     return Container(
       margin: EdgeInsets.all(9),
       height: 110,
@@ -260,9 +259,7 @@ class _homepageState extends State<homepage> {
     );
   }
 
-  GestureDetector viwe(
-    int index,
-  ) {
+  GestureDetector viwe(int index,) {
     return GestureDetector(
       onTap: () {
         print("hiii ");

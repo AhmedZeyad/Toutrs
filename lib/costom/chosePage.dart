@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:tuters/Data/homeData.dart';
 import 'package:tuters/Data/pupblicData.dart';
 
+var indexPage = 0;
 class chosePage extends StatefulWidget {
   @override
   State<chosePage> createState() => _chosePageState();
 }
 
-var indexPage = 0;
 
 class _chosePageState extends State<chosePage> {
   @override

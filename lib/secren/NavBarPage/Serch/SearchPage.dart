@@ -32,7 +32,7 @@ class _searchState extends State<search> {
         offer(),
         Expanded(
           child: ListView.builder(itemBuilder: ((context,int index){
-            return               post(allmealsoffer?[index].mealImage??null_image,index);
+            return               post(allmealsoffer?[index].image??null_image,index);
 
           }),
 itemCount: (allmealsoffer?.length??2)-1,
@@ -115,7 +115,7 @@ itemCount: (allmealsoffer?.length??2)-1,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                allmealsoffer?[index].mealName??"null",
+                allmealsoffer?[index].resN??"null",
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -126,7 +126,7 @@ itemCount: (allmealsoffer?.length??2)-1,
                 height: 50,
                 width:190,
                 child: Text(
-allmealsoffer?[index].mealCaption??"null",                  overflow: TextOverflow.ellipsis,
+allmealsoffer?[index].caption??"null",                  overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   style: TextStyle(fontSize: 16, color: Colors.black),
                 ),

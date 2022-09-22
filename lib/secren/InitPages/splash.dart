@@ -6,6 +6,7 @@ import 'package:tuters/secren/NavBarPage/Home/homepage.dart';
 
 import '../../Data/pupblicData.dart';
 import '../../costom/chosePage.dart';
+import 'login_page.dart';
 
 class SplashPage extends StatefulWidget {
 
@@ -18,7 +19,8 @@ class _SplashPage extends State<SplashPage>
   @override
   void FuterDlay() {
     Future.delayed(Duration(seconds: 3), () {
-      Navigator.of(context).push(MaterialPageRoute(builder: (_) =>  chosePage()));
+      // Navigator.of(context).push(MaterialPageRoute(builder: (_) =>  login()));
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) =>  login()));
     });
   }
 
